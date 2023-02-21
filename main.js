@@ -17,6 +17,28 @@ const content = document.createElement("div");
 //content.textContent = `You win! ${playerSelection} beats ${computerSelection} `;
 //resultsDivJs.appendChild(content);
 
+
+//One round of game
+function oneRound(playerSelection) {
+  computerSelection = getComputerChoice();
+  let result = "";
+  console.log("Computer: " + computerSelection);
+  if (
+    (playerSelection === "paper" && computerSelection === "rock") ||
+    (playerSelection === "rock" && computerSelection === "scissors") ||
+    (playerSelection === "scissors" && computerSelection === "paper")
+  ) {
+    playerScore += 1;
+    result = ` You win! ${playerSelection} beats ${computerSelection}.`
+  } else if (playerSelection === computerSelection) {
+    return "It is a tie!";
+  } else {
+    return ` You lose! ${computerSelection} beats ${playerSelection}`;
+  }
+  DocumentTimeline.getElementById("resultsDiv").innerHtml = result;
+  return
+}
+
 //Three button listen to click and play a round with the choosed weapon
 const rockBtnJs = document
   .getElementById("rockBtn")
@@ -41,24 +63,6 @@ const scissorsBtnJs = document
     oneRound(playerSelection);
     console.log("Player: " + playerSelection);
   });
-
-//One round of game
-function oneRound(playerSelection, playerScore) {
-  computerSelection = getComputerChoice();
-  console.log("Computer: " + computerSelection);
-  if (
-    (playerSelection === "paper" && computerSelection === "rock") ||
-    (playerSelection === "rock" && computerSelection === "scissors") ||
-    (playerSelection === "scissors" && computerSelection === "paper")
-  ) {
-    playerScore += 1;
-    console.log(playerscore);
-  } else if (playerSelection === computerSelection) {
-    return "It is a tie!";
-  } else {
-    return ` You lose! ${computerSelection} beats ${playerSelection}`;
-  }
-}
 
 
 /*
