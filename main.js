@@ -1,5 +1,26 @@
 let playerScore = 0;
-let ComputerScore = 0;
+let computerScore = 0;
+
+
+
+
+function logPlayerScore() {
+  const resultsDivPlayer = document.getElementById("resultsDiv");
+  const playerScoreUi = document.createElement("p");
+  playerScoreUi.classList.add("resultsCss");
+  playerScoreUi.textContent = (`Player Score: ${playerScore}`);
+  playerScoreUi.appendChild(resultsDivPlayer);
+}
+
+logPlayerScore();
+
+function logComputerScore() {
+  const resultsDivComputer = document.getElementById("resultsDiv");
+  let computerScoreUi = document.createElement("p");
+  computerScoreUi.classList.add("resultsCss");
+  computerScoreUi.textContent = (`Computer Score: ${computerScore}`);
+  computerScoreUi.appendChild(resultsDivComputer);
+}
 
 // Random choice from Computer
 function getComputerChoice() {
@@ -17,11 +38,12 @@ const content = document.createElement("div");
 //content.textContent = `You win! ${playerSelection} beats ${computerSelection} `;
 //resultsDivJs.appendChild(content);
 
-
 //One round of game
-function oneRound(playerSelection) {
+function oneRound(playerSelection, logPlayerScore) {
   computerSelection = getComputerChoice();
-  let result = "";
+  let playerResult = logPlayerScore();
+  let computerResult = logComputerScore();
+
   console.log("Computer: " + computerSelection);
   if (
     (playerSelection === "paper" && computerSelection === "rock") ||
@@ -29,24 +51,24 @@ function oneRound(playerSelection) {
     (playerSelection === "scissors" && computerSelection === "paper")
   ) {
     playerScore += 1;
-    result = ` You win! ${playerSelection} beats ${computerSelection}.`
+    playerResult
+    computerResult;
   } else if (playerSelection === computerSelection) {
     return "It is a tie!";
   } else {
     return ` You lose! ${computerSelection} beats ${playerSelection}`;
   }
   DocumentTimeline.getElementById("resultsDiv").innerHtml = result;
-  return
+  return;
 }
 
 //Three button listen to click and play a round with the choosed weapon
-const rockBtnJs = document
-  .getElementById("rockBtn")
-  .addEventListener("click", () => {
-    playerSelection = "rock";
-    oneRound(playerSelection);
-    console.log("Player: " + playerSelection);
-  });
+const rockBtnJs = document.getElementById("rockBtn");
+rockBtnJs.addEventListener("click", () => {
+  playerSelection = "rock";
+  oneRound(playerSelection);
+  console.log("Player: " + playerSelection);
+});
 
 const paperBtnJs = document
   .getElementById("paperBtn")
@@ -63,6 +85,7 @@ const scissorsBtnJs = document
     oneRound(playerSelection);
     console.log("Player: " + playerSelection);
   });
+
 
 
 /*
